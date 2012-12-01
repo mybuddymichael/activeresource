@@ -1484,7 +1484,7 @@ module ActiveResource
       # Tries to find a resource for a given name; if it fails, then the resource is created
       def find_or_create_resource_for(name)
         return reflections[name.to_sym].klass if reflections.key?(name.to_sym)
-        resource_name = name.to_s.camelize
+        resource_name = name.to_s.gsub('/','_').camelize
 
         const_args = [resource_name, false]
         if self.class.const_defined?(*const_args)
